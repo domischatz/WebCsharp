@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Web_Grundlagen</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Web_Grundlagen.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    @*
+        div ... Container (Blocksement -> Absatz wird erzeugt)
+        span ... Container (Inlineelement -> Textfluss bleibt erhalten kein Absatz)
+        id ... eindeutige Benennung eines Elements 
+        class ... um z.B. die Formatierung (CSS) auf mehrere Elemente anzuwenden    
+        
+        header, main, nav, content, footer ... sind HTML5-Tags -> sie werden mormalerweise für das Layout verwendet
+
+        partielle Views: (teil einer View): --> shared rechtsklich hinzufügen- Ansicht- Razor-Ansicht- Teilansicht
+        htlm, css, js, Razor
+
+
+    *@
+            <div id=" = container">
+                <header> 
+
+                    Kopfbereich
+                </header>
+                <main> 
+                    <nav> 
+                       @await Html.PartialAsync("Navigation")
+                    </nav>
+
+                    <content> 
+                        @* renderBody() zeigt hier die aktuelle View an*@
+                        
+                        @RenderBody()
+                    </content>
+                </main>
+                <footer>
+                    Fußbereich
+                </footer>
+                
+            </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

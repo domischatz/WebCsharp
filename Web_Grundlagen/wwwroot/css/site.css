@@ -1,0 +1,85 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/*
+    unsere eigene Formatierungen
+    *... alle Tags formatieren
+*/
+
+/**{
+    border: 1px solid black;
+}*/
+#container{
+
+}
+
+header{
+    height: 160px;
+    border-bottom: 1px solid #a3a2a2;
+}
+
+nav {
+    width: 25%;
+    float: left;
+    height: 550px;
+    border-right: 1px solid #a3a2a2;
+    padding: 20px 0px 0px 10px;
+}
+
+content{
+    width:50%;
+    float: left;
+    hight: 550px;
+    padding: 10px;
+}
+
+footer {
+    clear: left;
+    height: 50px;
+    text-align: right;
+    padding: 10px;
+    border-top: 1px solid #a3a2a2;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    font-weight: bold;
+}
+
+nav ul{
+    list-style-type: none;
+    padding: 0px;
+}
+
+.Level1{
+
+}
+
+.Level2{
+    font-size: 85%;
+    padding-left: 15px;
+}
+
+.HeaderLevel1 {
+    background: #258cfb
+}

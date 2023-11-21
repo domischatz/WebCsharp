@@ -1,0 +1,24 @@
+﻿@model Web_Grundlagen.Models.User
+
+@*
+    model .. gibt den Datendyp an, der vom Controller an die View pbergeben wird.
+
+    Model ... Instanz/Objekt - enthält die Daten des Models
+*@
+
+@{
+    ViewData["Title"] = "showOneUser";
+}
+
+<h1>showOneUser</h1>
+
+<p> 
+    <b> Name: </b>@Model.Name
+</p>
+<p> 
+    <b> Mail: </b>@Model.Email
+</p>
+<p> 
+    <b> Geburtsdatum: </b>@Model.Birthdate.ToLongDateString()
+</p>
+

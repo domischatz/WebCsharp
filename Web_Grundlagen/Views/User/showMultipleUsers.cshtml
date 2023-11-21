@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Web_Grundlagen.Models.User> 
+
+@{
+    ViewData["Title"] = "showMultipleUsers";
+}
+
+<h1>showMultipleUsers</h1>
+
+
+<table>
+    <thead class="HeaderLevel1">
+        <tr> 
+            <th>Name</th>
+            <th>Mail-Adresse</th>
+            <th>Geburtsdatum</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (User u in Model)
+        {
+        <tr> 
+            <td>@u.Name</td>
+            <td>@u.Email</td>
+            <td>@u.Birthdate.ToLongDateString()</td>
+            <td>
+            <!-- Löschen -->
+                <form asp-action="Delete" asp-controller="User" method="post" style="display:inline;">
+                    <input type="hidden" name="email" value="@u.Email"/>
+                    <button type="submit">Löschen</button>
+                </form>
+
+            <!-- Ändern -->
+                <form asp-action="Update" asp-controller="User" method="get" style="display:inline;">
+                    <input type="hidden" name="email" value="@u.Email" />
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>   
+        }
+
+    </tbody>
+
+    <tfoot>
+        <tr> 
+            <td colspan="4"></td>
+        </tr>
+
+    </tfoot>
+
+
+</table>

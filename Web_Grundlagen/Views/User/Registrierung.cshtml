@@ -1,0 +1,106 @@
+﻿@model Web_Grundlagen.Models.User
+@{
+    ViewData["Title"] = "Registrierung";
+}
+
+
+
+
+<form asp-controller="user" asp-action="@(ViewBag.Mode == "update"?"update": "registrierung")" method="post"> 
+
+    <table>
+        <thead>
+            @if(ViewBag.Mode != "update")
+            {
+                <tr>
+                    <th colspan="3"> Regestrierungsformular</th>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th colspan="3"> Updateformular</th>
+                </tr>   
+            }
+
+        </thead>
+        <tbody>
+            <tr> 
+                <td> Name *</td>
+                <td>
+                    <input type = "text" asp-for="Name"/> 
+                </td>
+                <td> 
+                    <span asp-validation-for="Name"> </span>
+                </td>
+            </tr>              
+            <tr> 
+                <td> Email-Adresse *</td>
+                <td> 
+                    @if (ViewBag.Mode != "update")
+                    {
+                        <input type="email" asp-for="Email" />
+                    }else{
+                        <input type="email" asp-for="Email" readonly />
+                    }
+                </td>
+
+                <td> 
+                    <span asp-validation-for="Email"> </span>
+                </td>
+            </tr>
+            }
+            <tr> 
+                <td> Geburtsdatum</td>
+                <td> 
+                    <input type="date" asp-for="Birthdate" />
+                </td>
+                <td> 
+                    <span asp-validation-for="Birthdate"> </span>
+                </td>
+            </tr>
+            @if(ViewBag.Mode != "update")
+            {
+            <tr> 
+                <td> Password *</td>
+                <td> 
+                    <input type="password" asp-for="Password" />
+                </td>
+                <td> 
+                    <span asp-validation-for="Password"> </span>
+                </td>
+            </tr>
+            <tr> 
+                <td> PasswordRetype *</td>
+                <td> 
+                    <input type="password" asp-for="PasswordRetype" />
+                </td>
+                <td> 
+                    <span asp-validation-for="PasswordRetype"> </span>
+                </td>
+            </tr>
+            }
+
+            <tr> 
+                <td colspan="2"> 
+                    @if(ViewBag.Mode != "update")
+                    {
+                        <input type="submit" value="registrieren" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="update" />  
+                    }
+                    <input type="reset" value="abbrechen"
+                </td>
+            </tr>
+        </tbody>
+        <tfoot> 
+            <th> 
+                *-Pflichtfeld
+            </th>
+        </tfoot>
+    </table>
+</form>
+
+
