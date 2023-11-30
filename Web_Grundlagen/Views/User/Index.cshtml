@@ -1,9 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Index";
+    var userEmail = Context.Session.GetString("UserEmail");
 }
 
 <h1>Index</h1>
 
-<p> 
-    Klicken sie auf
+<p>
+    Willkommen, @userEmail!
 </p>

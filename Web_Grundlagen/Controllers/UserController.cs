@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web_Grundlagen.Models;
@@ -104,6 +105,10 @@ namespace Web_Grundlagen.Controllers
 
                                 if (result == PasswordVerificationResult.Success)
                                 {
+                                    HttpContext.Session.SetString("UserEmail", loginUser.Email);
+                                    
+                            
+
                         // Erfolgreich eingeloggt
                         return RedirectToAction("Index", "Home");
                                 }
