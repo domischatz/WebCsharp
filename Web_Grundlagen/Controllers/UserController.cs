@@ -122,6 +122,17 @@ namespace Web_Grundlagen.Controllers
             });
         }
 
+        public IActionResult Logout()
+        {
+            // Hier kannst du zusätzliche Logout-Logik implementieren, wenn nötig.
+
+            // Session leeren
+            HttpContext.Session.Clear();
+
+            // Hier kannst du weitere Aktionen nach dem Logout hinzufügen, z.B. Redirect auf die Startseite.
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult showOneUser()
         {
             //die Daten eines Users an die View übergeben

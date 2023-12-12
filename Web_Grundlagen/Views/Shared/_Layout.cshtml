@@ -24,9 +24,21 @@
 
     *@
             <div id=" = container">
-                <header> 
+                <header>
+           
+            @{
+                var userEmail = Context.Session.GetString("UserEmail");
+                if(userEmail != null)
+                {
+                <a asp-controller="User" asp-action="Logout">Logout</a>
+                    <p> @userEmail</p>
+                }
+                if(userEmail == null)
+                {
+                    <a href="/user/login"> Login</a>
+                }
 
-                    Kopfbereich
+            }
                 </header>
                 <main> 
                     <nav> 
@@ -42,7 +54,7 @@
                 <footer>
                     Fußbereich
                 </footer>
-                
+
             </div>
 
 
