@@ -12,6 +12,8 @@ namespace Web_Grundlagen.Models
 
         public DateTime Birthdate { get; set; }
 
+        public UserRole Role { get; set; }
+
         public String Password { get; set; }
 
 
@@ -19,4 +21,10 @@ namespace Web_Grundlagen.Models
         public String PasswordRetype { get; set; }
 
     }
+}
+
+public enum UserRole
+{
+    RegisteredUser,
+    Admin
 }

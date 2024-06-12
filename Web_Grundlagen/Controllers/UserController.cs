@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web_Grundlagen.Models;
 
+
 namespace Web_Grundlagen.Controllers
 {
 
@@ -21,7 +22,46 @@ namespace Web_Grundlagen.Controllers
                 Birthdate = DateTime.Today,
             });
         }
+        [HttpPost]
+        public async Task<IActionResult> RegistrierungAsync(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var passwordHasher = new PasswordHasher<User>();
+                user.Password = passwordHasher.HashPassword(user, user.Password);
 
+                using (MyContext context = new MyContext())
+                {
+                    await context.Users.AddAsync(user);
+
+                    try
+                    {
+                        int result = await context.SaveChangesAsync();
+                        if (result == 1)
+                        {
+                            return View("Message", new Message()
+                            {
+                                Title = "Registrierung",
+                                MessageText = "Sie wurden erfolgreich Registriert!"
+                            });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                         
+                    }
+                }
+            }
+            return View("Message", new Message()
+            {
+                Title = "Registrierung",
+                MessageText = "Fehler bei der Registrierung"
+            });
+        }
+
+
+
+        /*
         // die Formulardaten werden automatisch (Middleware) in die Properties von User kopiert
         [HttpPost]
         public async Task<IActionResult> RegistrierungAsync(User user)
@@ -84,6 +124,7 @@ namespace Web_Grundlagen.Controllers
                 MessageText = "Fehler bei der Registrierung"
             });
         }
+    */
         public IActionResult Login()
         {
             return View();
@@ -97,6 +138,7 @@ namespace Web_Grundlagen.Controllers
                             // Benutzer mit E-Mail-Adresse abrufen
                             var existingUser = await context.Users.FindAsync(loginUser.Email);
 
+
                             if (existingUser != null)
                             {
                                 // Passwort überprüfen
@@ -106,8 +148,7 @@ namespace Web_Grundlagen.Controllers
                                 if (result == PasswordVerificationResult.Success)
                                 {
                                     HttpContext.Session.SetString("UserEmail", loginUser.Email);
-                                    
-                            
+                                    HttpContext.Session.SetInt32("UserRole", (int)existingUser.Role);
 
                         // Erfolgreich eingeloggt
                         return RedirectToAction("Index", "Home");
@@ -124,15 +165,14 @@ namespace Web_Grundlagen.Controllers
 
         public IActionResult Logout()
         {
-            // Hier kannst du zusätzliche Logout-Logik implementieren, wenn nötig.
-
             // Session leeren
             HttpContext.Session.Clear();
 
-            // Hier kannst du weitere Aktionen nach dem Logout hinzufügen, z.B. Redirect auf die Startseite.
+            //Redirect auf die Startseite.
             return RedirectToAction("Index", "Home");
         }
 
+       /*
         public IActionResult showOneUser()
         {
             //die Daten eines Users an die View übergeben
@@ -154,6 +194,7 @@ namespace Web_Grundlagen.Controllers
             // Daten (User   u) an dei View übergeben
             return View(u2);
         }
+       */
         public IActionResult showMultipleUsers()
         {
             using (MyContext context = new MyContext())
@@ -177,7 +218,7 @@ namespace Web_Grundlagen.Controllers
         }
 
 
-        public async Task<IActionResult> Update(String email)
+        public async Task<IActionResult> Update(String email) // email weil name bei layout = "email"
         {
             using (MyContext context = new MyContext())
             {
@@ -186,6 +227,7 @@ namespace Web_Grundlagen.Controllers
                 return View("Registrierung", user);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Update(User updatedUser)
         {
@@ -200,7 +242,7 @@ namespace Web_Grundlagen.Controllers
                     user.Birthdate=updatedUser.Birthdate;
                     if (await context.SaveChangesAsync() == 1)
                     {
-                        return RedirectToAction("ShowMultipleUsers");
+                        return RedirectToAction("index");
                     }
                 }
                 return View("Message",new Message() { 

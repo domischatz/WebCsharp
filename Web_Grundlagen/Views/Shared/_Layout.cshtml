@@ -32,6 +32,10 @@
                 {
                 <a asp-controller="User" asp-action="Logout">Logout</a>
                     <p> @userEmail</p>
+                <form asp-action="Update" asp-controller="User" method="get" style="display:inline;">
+                    <input type="hidden" name="email" value="@userEmail" />
+                    <button type="submit">Update</button>
+                </form>
                 }
                 if(userEmail == null)
                 {
@@ -51,6 +55,7 @@
                         @RenderBody()
                     </content>
                 </main>
+                <aside>Seitenbereich</aside>
                 <footer>
                     Fußbereich
                 </footer>

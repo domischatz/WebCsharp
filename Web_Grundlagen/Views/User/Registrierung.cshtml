@@ -3,9 +3,6 @@
     ViewData["Title"] = "Registrierung";
 }
 
-
-
-
 <form asp-controller="user" asp-action="@(ViewBag.Mode == "update"?"update": "registrierung")" method="post"> 
 
     <table>
@@ -32,6 +29,7 @@
                 </td>
                 <td> 
                     <span asp-validation-for="Name"> </span>
+                    <span id="valName"> Name muss 3 Zeichen kang sein</span>
                 </td>
             </tr>              
             <tr> 
@@ -57,6 +55,7 @@
                 </td>
                 <td> 
                     <span asp-validation-for="Birthdate"> </span>
+                    <span id="valBirthdate"> Geburtstag darf nicht in der Zukunft liegen</span>
                 </td>
             </tr>
             @if(ViewBag.Mode != "update")
@@ -77,6 +76,8 @@
                 </td>
                 <td> 
                     <span asp-validation-for="PasswordRetype"> </span>
+                    <span id="valPasswordRetype"> Passwörter stimmen nicht überein</span>
+
                 </td>
             </tr>
             }
@@ -85,13 +86,14 @@
                 <td colspan="2"> 
                     @if(ViewBag.Mode != "update")
                     {
-                        <input type="submit" value="registrieren" />
+                        <input type="submit" value="registrieren" id="btnSubmitRegUpdate" />
+                        //<span id="valSpeichern"> Benutzer wurde erflgreich hinzugefügt</span>
                     }
                     else
                     {
                         <input type="submit" value="update" />  
                     }
-                    <input type="reset" value="abbrechen"
+                    <input type="reset" value="abbrechen"/>
                 </td>
             </tr>
         </tbody>
@@ -104,3 +106,6 @@
 </form>
 
 
+@section scripts{
+        <script src="~/js/registration_validation.js"></script>
+}

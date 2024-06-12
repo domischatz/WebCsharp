@@ -17,13 +17,18 @@
                             <li class="Level2">
                                 <a href="/user/registrierung"> Registirerung</a>
                             </li>
-
+                            <!-- 
                             <li class="Level2">
                                 <a href="/user/showOneUser"> Daten eines Users</a>
                             </li>
-                            <li class="Level2">
-                                <a href="/user/showMultipleUsers"> Daten mehrerer User</a>
-                            </li>
+                            -->
+    @if(Context.Session.GetInt32("UserRole") == 1)
+    {
+        <li class="Level2">
+            <a href="/user/showMultipleUsers"> Daten mehrerer User</a>
+        </li>
+    }
+                            
 
 
 </ul>

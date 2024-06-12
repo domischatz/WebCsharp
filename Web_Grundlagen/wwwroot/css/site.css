@@ -36,6 +36,12 @@ header{
     height: 160px;
     border-bottom: 1px solid #a3a2a2;
 }
+aside {
+    border-left: 1px solid red;
+    float: left;
+    height: 550px;
+}
+
 
 nav {
     width: 25%;
